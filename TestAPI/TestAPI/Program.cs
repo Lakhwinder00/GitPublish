@@ -11,7 +11,6 @@ builder.WebHost.UseUrls(Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ??
 var app = builder.Build();
 
 app.MapGet("/", () => "API is running");
-var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
