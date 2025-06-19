@@ -21,6 +21,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+if (app.Environment.IsDevelopment() || true) // optional: always show in production
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(); // You can customize Swagger UI here if needed
+}
+
+app.MapControllers();
+
+app.Run();
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
