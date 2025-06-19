@@ -15,16 +15,14 @@ var app = builder.Build();
 
 app.MapGet("/", () => "API is running");
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || true) // force enable Swagger even in production
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
-}
-if (app.Environment.IsDevelopment() || true) // optional: always show in production
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(); // You can customize Swagger UI here if needed
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+        options.RoutePrefix = "swagger"; // URL will be /swagger/index.html
+    });
 }
 
 app.MapControllers();
