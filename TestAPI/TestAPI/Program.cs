@@ -6,7 +6,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.WebHost.UseUrls(Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "http://localhost:5000");
 
+var app = builder.Build();
+
+app.MapGet("/", () => "API is running");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
