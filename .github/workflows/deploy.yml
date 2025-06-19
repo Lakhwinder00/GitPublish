@@ -1,0 +1,32 @@
+name: Auto Deploy to DigitalOcean
+
+on:
+  push:
+    branches:
+      - main  # Change to 'master' if your default branch is master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Setup SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H 178.128.235.178 >> ~/.ssh/known_hosts
+
+    - name: Deploy to DigitalOcean
+      run: |
+        ssh root@178.128.235.178 << 'EOF'
+          cd ~/GitPublish/TestAPI/TestAPI
+          git pull origin main
+          dotnet publish -c Release
+          cd bin/Release/net8.0/publish
+          pkill -f 'dotnet TestAPI.dll' || true
+          nohup dotnet TestAPI.dll > log.txt 2>&1 &
+        EOF
