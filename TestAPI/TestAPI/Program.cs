@@ -1,7 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Bind to environment variable port
-builder.WebHost.UseUrls("http://0.0.0.0:8080");
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Configure(builder.Configuration.GetSection("Kestrel"));
+});
 
 // Add services to the container.
 builder.Services.AddControllers();
