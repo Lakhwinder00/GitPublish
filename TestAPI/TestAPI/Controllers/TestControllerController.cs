@@ -23,7 +23,8 @@ namespace TestAPI.Controllers
             {
                 new SampleItem { Id = 1, Name = "Item One" },
                 new SampleItem { Id = 2, Name = "Item Two" },
-                new SampleItem { Id = 3, Name = "Item Three" }
+                new SampleItem { Id = 3, Name = "Item Three" },
+                  new SampleItem { Id = 3, Name = "Item Three" }
             };
 
             return Ok(data);
