@@ -24,7 +24,9 @@ namespace TestAPI.Controllers
                 new SampleItem { Id = 1, Name = "Item One" },
                 new SampleItem { Id = 2, Name = "Item Two" },
                 new SampleItem { Id = 3, Name = "Item Three" },
-                 new SampleItem { Id = 3, Name = "Item Three nwq" }
+                 new SampleItem { Id = 3, Name = "Item four" },
+                 new SampleItem { Id = 3, Name = "Item five" },
+                 new SampleItem { Id = 3, Name = "Item six" }
             };
 
             return Ok(data);
